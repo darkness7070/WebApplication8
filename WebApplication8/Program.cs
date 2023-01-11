@@ -1,4 +1,4 @@
-using System.Text;
+п»їusing System.Text;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types.InputFiles;
@@ -15,7 +15,7 @@ int OutTime = 15;
 List<HttpsProxy> listProxy = new();
 string[] file = System.IO.File.ReadAllLines("https_proxy");
 
-string help = "/add login:password@host:port - добавить прокси\n /del {index} - удалить прокс\n /list - список прокси";
+string help = "/add login:password@host:port - РґРѕР±Р°РІРёС‚СЊ РїСЂРѕРєСЃРё\n /del {index} - СѓРґР°Р»РёС‚СЊ РїСЂРѕРєСЃ\n /list - СЃРїРёСЃРѕРє РїСЂРѕРєСЃРё";
 const string url = @"https://www.humblebundle.com/login?hmb_source=navbar&goto=%2F";
 const int RequestTime = 3;
 const int QueueSize = 100;
@@ -39,13 +39,13 @@ Console.WriteLine(_client.GetMeAsync().Result.FirstName + " OK!");
 
 async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
 {
-    string syntax = "Используйте данный синтаксис:" + help;
+    string syntax = "РСЃРїРѕР»СЊР·СѓР№С‚Рµ РґР°РЅРЅС‹Р№ СЃРёРЅС‚Р°РєСЃРёСЃ:" + help;
     var message = update.Message;
     if (message == null) return;
     string[] arg = message.Text.Split(' ');
     if (message.Chat.Id.ToString() != idUser.ToString())
     {
-        await _client.SendTextMessageAsync(chatId: message.Chat.Id, text: "Чао, ты не мой босс");
+        await _client.SendTextMessageAsync(chatId: message.Chat.Id, text: "Р§Р°Рѕ, С‚С‹ РЅРµ РјРѕР№ Р±РѕСЃСЃ");
         return;
     }
 
@@ -75,7 +75,7 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
         }
         if (proxy[0].Split(':').Count() + proxy[1].Split(':').Count() != 4)
         {
-            await _client.SendTextMessageAsync(chatId: idUser, text: "Прокси удалён");
+            await _client.SendTextMessageAsync(chatId: idUser, text: "РџСЂРѕРєСЃРё СѓРґР°Р»С‘РЅ");
             return;
         }
         string text = string.Empty;
@@ -94,7 +94,7 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
         }
         catch
         {
-            await _client.SendTextMessageAsync(chatId: idUser, text: "Не удалось добавить прокси");
+            await _client.SendTextMessageAsync(chatId: idUser, text: "РќРµ СѓРґР°Р»РѕСЃСЊ РґРѕР±Р°РІРёС‚СЊ РїСЂРѕРєСЃРё");
             return;
         }
         using (FileStream str = new("https_proxy", FileMode.Append, FileAccess.Write))
@@ -104,7 +104,7 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
             await str.FlushAsync();
             str.Close();
         }
-        await _client.SendTextMessageAsync(chatId: idUser, text: "Прокси добавлен");
+        await _client.SendTextMessageAsync(chatId: idUser, text: "РџСЂРѕРєСЃРё РґРѕР±Р°РІР»РµРЅ");
         return;
     }
     if (arg[0].ToLower() == "/del")
@@ -138,7 +138,7 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
             str.Close();
         }
         listProxy.Remove(delProxy);
-        await _client.SendTextMessageAsync(chatId: idUser, text: "Прокси удалён");
+        await _client.SendTextMessageAsync(chatId: idUser, text: "РџСЂРѕРєСЃРё СѓРґР°Р»С‘РЅ");
     }
     else
     {
