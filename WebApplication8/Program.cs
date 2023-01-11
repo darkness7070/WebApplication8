@@ -15,7 +15,7 @@ int OutTime = 15;
 List<HttpsProxy> listProxy = new();
 string[] file = System.IO.File.ReadAllLines("https_proxy");
 
-string help = "/add login:password@host:port - добавить прокси\n /del {index} - удалить прокси\n /list - список прокси";
+string help = "/add login:password@host:port - добавить прокси\n /del {index} - удалить прокс\n /list - список прокси";
 const string url = @"https://www.humblebundle.com/login?hmb_source=navbar&goto=%2F";
 const int RequestTime = 3;
 const int QueueSize = 100;
